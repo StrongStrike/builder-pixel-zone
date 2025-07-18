@@ -122,7 +122,7 @@ export const ProductCarousel = ({
         </div>
 
         {/* Main Carousel */}
-        <div className="relative">
+        <div className="relative carousel-container">
           {isInView && (
             <Swiper
               modules={[
