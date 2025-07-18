@@ -305,7 +305,7 @@ section:target {
 
 /* Safe area padding for better content visibility */
 .pb-safe {
-  padding-bottom: max(2rem, env(safe-area-inset-bottom, 0));
+  padding-bottom: 0;
 }
 
 /* Optimize GPU acceleration */
