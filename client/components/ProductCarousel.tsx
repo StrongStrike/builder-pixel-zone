@@ -123,7 +123,7 @@ export const ProductCarousel = ({
 
         {/* Main Carousel */}
         <div className="relative">
-          {(!isMobile || isInView) && (
+          {isInView && (
             <Swiper
               modules={[
                 Navigation,
@@ -134,11 +134,10 @@ export const ProductCarousel = ({
                 Keyboard,
                 Mousewheel,
               ]}
+              // Общие настройки
               spaceBetween={isMobile ? 20 : 30}
               slidesPerView={1}
               centeredSlides={true}
-              touchRatio={1}
-              touchAngle={45}
               grabCursor={true}
               resistance={true}
               resistanceRatio={0.85}
@@ -148,10 +147,10 @@ export const ProductCarousel = ({
               longSwipesMs={300}
               followFinger={true}
               allowTouchMove={true}
-              touchMoveStopPropagation={false}
               simulateTouch={true}
               touchStartPreventDefault={false}
               touchStartForcePreventDefault={false}
+              // Автоматическая прокрутка
               autoplay={{
                 delay: 4000,
                 disableOnInteraction: false,
@@ -160,14 +159,13 @@ export const ProductCarousel = ({
                 reverseDirection: false,
                 stopOnLastSlide: false,
               }}
-              watchSlidesProgress={true}
-              watchOverflow={true}
-              preventInteractionOnTransition={false}
+              // Обновление и наблюдение за слайдами
               observer={true}
               observeParents={true}
               observeSlideChildren={true}
-              updateOnWindowResize={true}
               resizeObserver={true}
+              updateOnWindowResize={true}
+              // Анимация и эффект
               effect={isMobile ? "slide" : "coverflow"}
               coverflowEffect={{
                 rotate: 15,
@@ -176,15 +174,18 @@ export const ProductCarousel = ({
                 modifier: 1,
                 slideShadows: true,
               }}
+              // Навигация
               navigation={{
                 prevEl: `.${sectionId}-prev`,
                 nextEl: `.${sectionId}-next`,
               }}
+              // Пагинация
               pagination={{
                 el: `.${sectionId}-pagination`,
                 clickable: true,
                 dynamicBullets: true,
               }}
+              // Адаптивность с breakpoints
               breakpoints={{
                 480: {
                   slidesPerView: 1.1,
@@ -207,7 +208,7 @@ export const ProductCarousel = ({
                   spaceBetween: 35,
                 },
               }}
-              className="!pb-8 md:!pb-10"
+              // Доступность
               a11y={{
                 enabled: true,
                 prevSlideMessage: "Previous slide",
@@ -216,18 +217,17 @@ export const ProductCarousel = ({
                 lastSlideMessage: "This is the last slide",
                 paginationBulletMessage: "Go to slide {{index}}",
                 slideLabelMessage: "{{index}} / {{slidesLength}}",
-                containerMessage: null,
-                containerRoleDescriptionMessage: null,
-                itemRoleDescriptionMessage: null,
-                slideRole: "group",
-                id: null,
               }}
+              // Управление клавиатурой
               keyboard={{
                 enabled: true,
                 onlyInViewport: true,
                 pageUpDown: true,
               }}
+              // Мышь
               mousewheel={false}
+              // Общие стили
+              className="!pb-8 md:!pb-10"
             >
               {products.map((product) => (
                 <SwiperSlide key={product.id}>
