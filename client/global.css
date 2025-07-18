@@ -243,7 +243,7 @@ p, span, h1, h2, h3, h4, h5, h6 {
   -webkit-user-select: text; -moz-user-select: text; user-select: text;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .catalog-card:hover,
   .catalog-card:active {
     transform: none !important;
@@ -251,5 +251,30 @@ p, span, h1, h2, h3, h4, h5, h6 {
     box-shadow: none !important;
     border-color: inherit !important;
     z-index: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Отключить hover-эффекты карточки Swiper/Group на мобиле */
+  .swiper-slide .group:hover,
+  .swiper-slide .group:active,
+  .swiper-slide .group,
+  .swiper-slide .group *,
+  .swiper-slide .group-hover\:scale-110,
+  .swiper-slide .hover\:scale-105,
+  .swiper-slide .hover\:-translate-y-2,
+  .swiper-slide .hover\:-translate-y-4,
+  .swiper-slide .hover\:shadow-catalog-hover,
+  .swiper-slide .hover\:border-royal,
+  .swiper-slide .hover\:border-catalog-hover,
+  .swiper-slide .group-hover\:opacity-100,
+  .swiper-slide .group-hover\:translate-x-full {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    will-change: auto !important;
   }
 }
