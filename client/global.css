@@ -242,3 +242,14 @@ button, input, textarea, select {
 p, span, h1, h2, h3, h4, h5, h6 {
   -webkit-user-select: text; -moz-user-select: text; user-select: text;
 }
+
+@media (max-width: 1023px) {
+  .catalog-card:hover,
+  .catalog-card:active {
+    transform: none !important;
+    rotate: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
+    z-index: auto !important;
+  }
+}
