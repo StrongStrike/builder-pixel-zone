@@ -152,7 +152,7 @@
 
 /* Professional Swiper Customization */
 .swiper {
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .swiper-slide {
@@ -361,6 +361,9 @@ section:target {
   .swiper-3d .swiper-slide-shadow-left,
   .swiper-3d .swiper-slide-shadow-right {
     display: none !important;
+  }
+  .swiper {
+    overflow: hidden !important;
   }
 
   /* Optimize scroll behavior for mobile */
