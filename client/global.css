@@ -152,7 +152,7 @@
 
 /* Professional Swiper Customization */
 .swiper {
-  overflow: visible;
+  overflow: visible !important;
 }
 
 .swiper-slide {
