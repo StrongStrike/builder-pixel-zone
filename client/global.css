@@ -418,6 +418,18 @@ section:target {
     transform: none !important;
     rotate: none !important;
   }
+
+  .swiper-slide > div > .relative:hover,
+  .swiper-slide > div > .relative:active {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
+    z-index: auto !important;
+  }
+  .swiper-slide > div > .relative:hover .group-hover\:scale-110,
+  .swiper-slide > div > .relative:active .group-hover\:scale-110 {
+    transform: none !important;
+  }
 }
 
 /* iOS Safari specific fixes */
