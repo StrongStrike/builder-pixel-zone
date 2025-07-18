@@ -123,6 +123,7 @@ export const ProductCarousel = ({
 
         {/* Main Carousel */}
         <div className="relative">
+          {isInView && (
             <Swiper
               modules={[
                 Navigation,
@@ -330,6 +331,7 @@ export const ProductCarousel = ({
                 </SwiperSlide>
               ))}
             </Swiper>
+          )}
 
           {/* Custom Navigation - Hidden on mobile for cleaner look */}
           <div className="hidden md:flex justify-center items-center space-x-4 mt-3">
