@@ -150,6 +150,7 @@ export const ProductCarousel = ({
               simulateTouch={true}
               touchStartPreventDefault={false}
               touchStartForcePreventDefault={false}
+              style={{ touchAction: 'pan-y' }}
               // Автоматическая прокрутка
               autoplay={{
                 delay: 4000,
