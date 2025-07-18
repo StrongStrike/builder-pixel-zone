@@ -166,8 +166,8 @@ export const DesktopNavigation = ({
             <button
               onClick={() => scrollToSection(category.section)}
               className={`relative w-14 h-14 rounded-xl font-bold transition-all duration-500 shadow-lg hover:scale-110 overflow-hidden ${activeSection === category.section
-                  ? "bg-royal text-white shadow-catalog-hover scale-110"
-                  : "bg-white/90 backdrop-blur-sm text-royal hover:bg-royal hover:text-white"
+                ? "bg-royal text-white shadow-catalog-hover scale-110"
+                : "bg-white/90 backdrop-blur-sm text-royal hover:bg-royal hover:text-white"
                 }`}
             >
               <span className="relative z-10">{category.id}</span>
@@ -238,10 +238,12 @@ export const MobileNavigation = ({
       const elementTop = element.offsetTop;
       const offset = 80; // Отступ от верха
 
-      window.scrollTo({
-        top: elementTop - offset,
-        behavior: "smooth"
-      });
+      const root = document.getElementById("root");
+      if (root) {
+        root.scrollTo({ top: ..., behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: ..., behavior: "smooth" });
+      }
 
       onSectionChange(sectionId);
       setIsExpanded(false); // Close expanded view after selection
@@ -341,15 +343,15 @@ export const MobileNavigation = ({
                   key={category.id}
                   onClick={() => scrollToSection(category.section)}
                   className={`group relative p-4 rounded-xl transition-all duration-300 ${activeSection === category.section
-                      ? "bg-royal text-white shadow-lg scale-105"
-                      : "bg-gray-50 text-royal hover:bg-royal/10 hover:scale-102"
+                    ? "bg-royal text-white shadow-lg scale-105"
+                    : "bg-gray-50 text-royal hover:bg-royal/10 hover:scale-102"
                     }`}
                 >
                   <div className="text-center">
                     <div
                       className={`w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-lg ${activeSection === category.section
-                          ? "bg-white/20 text-white"
-                          : "bg-royal text-white"
+                        ? "bg-white/20 text-white"
+                        : "bg-royal text-white"
                         }`}
                     >
                       {category.id}
