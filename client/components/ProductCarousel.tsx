@@ -110,7 +110,7 @@ export const ProductCarousel = ({
     <section
       id={sectionId}
       style={{
-        minHeight: isIOS ? '100vh' : 'auto',
+        minHeight: '100vh',
       }}
       className="min-h-screen py-12 md:py-20 px-3 md:px-4 relative overflow-visible"
     >
