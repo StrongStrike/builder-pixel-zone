@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 interface NavigationProps {
   activeSection: string;
@@ -17,132 +17,14 @@ const categories = [
   { id: "60", label: "60sm DekorPlast", section: "section-60" },
 ];
 
-// Хук для отслеживания скролла с улучшенной поддержкой iOS
-const useScrollSpy = (onSectionChange: (section: string) => void) => {
-  const [isScrolling, setIsScrolling] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    if (isScrolling) return; // Предотвращаем конфликт с программным скроллом
-
-    const scrollPosition = window.scrollY + window.innerHeight / 2;
-    let currentSection = "hero";
-
-    // Проверяем hero секцию
-    const heroElement = document.getElementById("hero");
-    if (heroElement) {
-      const heroRect = heroElement.getBoundingClientRect();
-      const heroTop = heroRect.top + window.scrollY;
-      const heroBottom = heroTop + heroRect.height;
-
-      if (scrollPosition >= heroTop && scrollPosition < heroBottom) {
-        currentSection = "hero";
-      }
-    }
-
-    // Проверяем остальные секции
-    for (const category of categories) {
-      const element = document.getElementById(category.section);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        const elementTop = rect.top + window.scrollY;
-        const elementBottom = elementTop + rect.height;
-
-        if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-          currentSection = category.section;
-          break;
-        }
-      }
-    }
-
-    onSectionChange(currentSection);
-  }, [onSectionChange, isScrolling]);
-
-  useEffect(() => {
-    // Добавляем обработчики для разных событий скролла
-    const handleScrollThrottled = () => {
-      requestAnimationFrame(handleScroll);
-    };
-
-    let scrollTimeout: NodeJS.Timeout;
-    const handleScrollWithTimeout = () => {
-      handleScrollThrottled();
-
-      // Дополнительная проверка через небольшой таймаут для iOS
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        handleScroll();
-      }, 100);
-    };
-
-    // Добавляем обработчики для всех типов событий скролла
-    window.addEventListener("scroll", handleScrollWithTimeout, { passive: true });
-    window.addEventListener("touchmove", handleScrollWithTimeout, { passive: true });
-    window.addEventListener("touchend", handleScrollWithTimeout, { passive: true });
-
-    // Intersection Observer как дополнительный способ отслеживания
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            const sectionId = entry.target.id;
-            if (sectionId && !isScrolling) {
-              onSectionChange(sectionId);
-            }
-          }
-        });
-      },
-      {
-        threshold: [0.3, 0.5, 0.7],
-        rootMargin: "-20% 0px -20% 0px"
-      }
-    );
-
-    // Наблюдаем за всеми секциями
-    const heroElement = document.getElementById("hero");
-    if (heroElement) observer.observe(heroElement);
-
-    categories.forEach((category) => {
-      const element = document.getElementById(category.section);
-      if (element) observer.observe(element);
-    });
-
-    // Инициализируем текущую секцию
-    setTimeout(handleScroll, 100);
-
-    return () => {
-      window.removeEventListener("scroll", handleScrollWithTimeout);
-      window.removeEventListener("touchmove", handleScrollWithTimeout);
-      window.removeEventListener("touchend", handleScrollWithTimeout);
-      observer.disconnect();
-      clearTimeout(scrollTimeout);
-    };
-  }, [handleScroll, onSectionChange, isScrolling]);
-
-  return { setIsScrolling };
-};
-
 export const DesktopNavigation = ({
   activeSection,
   onSectionChange,
 }: NavigationProps) => {
-  const { setIsScrolling } = useScrollSpy(onSectionChange);
-
   const scrollToSection = (sectionId: string) => {
-    setIsScrolling(true);
-  
     const element = document.getElementById(sectionId);
     if (element) {
-      const elementTop = element.offsetTop;
-      const offset = 80;
-  
-      window.scrollTo({ top: elementTop - offset, behavior: 'smooth' });
-  
-      // "Костыль" для iOS: повторяем скролл через 400мс обычным способом
-      setTimeout(() => {
-        window.scrollTo({ top: elementTop - offset, behavior: 'auto' });
-        setIsScrolling(false);
-      }, 400);
-  
+      element.scrollIntoView({ behavior: "smooth" });
       onSectionChange(sectionId);
     }
   };
@@ -162,10 +44,11 @@ export const DesktopNavigation = ({
           <div key={category.id} className="relative group">
             <button
               onClick={() => scrollToSection(category.section)}
-              className={`relative w-14 h-14 rounded-xl font-bold transition-all duration-500 shadow-lg hover:scale-110 overflow-hidden ${activeSection === category.section
+              className={`relative w-14 h-14 rounded-xl font-bold transition-all duration-500 shadow-lg hover:scale-110 overflow-hidden ${
+                activeSection === category.section
                   ? "bg-royal text-white shadow-catalog-hover scale-110"
                   : "bg-white/90 backdrop-blur-sm text-royal hover:bg-royal hover:text-white"
-                }`}
+              }`}
             >
               <span className="relative z-10">{category.id}</span>
               {/* Shimmer effect */}
@@ -224,29 +107,13 @@ export const MobileNavigation = ({
   onSectionChange,
 }: NavigationProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { setIsScrolling } = useScrollSpy(onSectionChange);
 
   const scrollToSection = (sectionId: string) => {
-    setIsScrolling(true);
-
     const element = document.getElementById(sectionId);
     if (element) {
-      // Используем более надежный способ скролла для iOS
-      const elementTop = element.offsetTop;
-      const offset = 80; // Отступ от верха
-
-      window.scrollTo({
-        top: elementTop - offset,
-        behavior: "smooth"
-      });
-
+      element.scrollIntoView({ behavior: "smooth" });
       onSectionChange(sectionId);
       setIsExpanded(false); // Close expanded view after selection
-
-      // Сбрасываем флаг скролла через некоторое время
-      setTimeout(() => {
-        setIsScrolling(false);
-      }, 1000);
     }
   };
 
@@ -337,17 +204,19 @@ export const MobileNavigation = ({
                 <button
                   key={category.id}
                   onClick={() => scrollToSection(category.section)}
-                  className={`group relative p-4 rounded-xl transition-all duration-300 ${activeSection === category.section
+                  className={`group relative p-4 rounded-xl transition-all duration-300 ${
+                    activeSection === category.section
                       ? "bg-royal text-white shadow-lg scale-105"
                       : "bg-gray-50 text-royal hover:bg-royal/10 hover:scale-102"
-                    }`}
+                  }`}
                 >
                   <div className="text-center">
                     <div
-                      className={`w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-lg ${activeSection === category.section
+                      className={`w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-lg ${
+                        activeSection === category.section
                           ? "bg-white/20 text-white"
                           : "bg-royal text-white"
-                        }`}
+                      }`}
                     >
                       {category.id}
                     </div>

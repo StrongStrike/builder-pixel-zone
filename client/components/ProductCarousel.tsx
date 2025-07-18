@@ -46,7 +46,7 @@ export const ProductCarousel = ({
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-
+  
   // Refs для стабильности
   const sectionRef = useRef<HTMLElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -62,10 +62,10 @@ export const ProductCarousel = ({
 
   // Определяем iOS более надежно
   useEffect(() => {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     isIOSRef.current = isIOS;
-
+    
     // Фиксим iOS viewport
     if (isIOS) {
       const viewport = document.querySelector('meta[name="viewport"]');
@@ -99,7 +99,7 @@ export const ProductCarousel = ({
       entries.forEach((entry) => {
         if (entry.target.id === sectionId) {
           const nowInView = entry.isIntersecting && entry.intersectionRatio > 0.1;
-
+          
           // Для iOS используем requestAnimationFrame для плавности
           if (isIOSRef.current) {
             requestAnimationFrame(() => {
@@ -228,7 +228,7 @@ export const ProductCarousel = ({
               spaceBetween={isMobile ? 20 : 30}
               slidesPerView={1}
               centeredSlides={true}
-
+              
               // Исправленные touch настройки для iOS
               touchRatio={isIOSRef.current ? 0.8 : 1}
               touchAngle={45}
@@ -246,7 +246,7 @@ export const ProductCarousel = ({
               touchStartPreventDefault={isIOSRef.current ? true : false}
               touchStartForcePreventDefault={isIOSRef.current ? true : false}
               touchReleaseOnEdges={true}
-
+              
               // Автоплей с учетом iOS
               autoplay={isIOSRef.current ? false : {
                 delay: 4000,
@@ -256,7 +256,7 @@ export const ProductCarousel = ({
                 reverseDirection: false,
                 stopOnLastSlide: false,
               }}
-
+              
               watchSlidesProgress={true}
               watchOverflow={true}
               preventInteractionOnTransition={isIOSRef.current ? true : false}
@@ -265,7 +265,7 @@ export const ProductCarousel = ({
               observeSlideChildren={true}
               updateOnWindowResize={true}
               resizeObserver={true}
-
+              
               // Эффекты
               effect={isMobile ? "slide" : "coverflow"}
               coverflowEffect={{
@@ -275,7 +275,7 @@ export const ProductCarousel = ({
                 modifier: isIOSRef.current ? 0.8 : 1,
                 slideShadows: !isIOSRef.current,
               }}
-
+              
               navigation={{
                 prevEl: `.${sectionId}-prev`,
                 nextEl: `.${sectionId}-next`,
@@ -285,7 +285,7 @@ export const ProductCarousel = ({
                 clickable: true,
                 dynamicBullets: true,
               }}
-
+              
               breakpoints={{
                 480: {
                   slidesPerView: 1.1,
@@ -308,12 +308,12 @@ export const ProductCarousel = ({
                   spaceBetween: 35,
                 },
               }}
-
+              
               className={`
                 !pb-8 md:!pb-10 
                 ${isIOSRef.current ? 'ios-swiper' : ''}
               `}
-
+              
               a11y={{
                 enabled: true,
                 prevSlideMessage: "Previous slide",
@@ -328,13 +328,13 @@ export const ProductCarousel = ({
                 slideRole: "group",
                 id: null,
               }}
-
+              
               keyboard={{
                 enabled: !isIOSRef.current,
                 onlyInViewport: true,
                 pageUpDown: true,
               }}
-
+              
               mousewheel={false}
             >
               {products.map((product, index) => (
@@ -399,8 +399,8 @@ export const ProductCarousel = ({
                       bg-white/90 backdrop-blur-sm border border-catalog-border/30 
                       shadow-catalog hover:shadow-catalog-hover 
                       transition-all duration-500 h-full
-                      ${isIOSRef.current ?
-                        'transform-gpu' :
+                      ${isIOSRef.current ? 
+                        'transform-gpu' : 
                         'transform hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-105 will-change-transform'
                       }
                     `}>
@@ -438,7 +438,7 @@ export const ProductCarousel = ({
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse">
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer"></div>
                         </div>
-
+                        
                         {/* Gradient overlay */}
                         <div className={`
                           absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent 
