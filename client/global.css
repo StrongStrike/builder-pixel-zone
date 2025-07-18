@@ -152,7 +152,7 @@
 
 /* Professional Swiper Customization */
 .swiper {
-  overflow: hidden !important;
+  overflow: visible;
 }
 
 .swiper-slide {
@@ -424,7 +424,7 @@ section:target {
   }
 
   /* Fix iOS Safari bounce scrolling */
-  body {
+  /* body {
     position: fixed;
     overflow: hidden;
     width: 100%;
@@ -436,7 +436,7 @@ section:target {
     height: 100vh;
     height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;
-  }
+  } */
 
   /* Fix iOS button appearance */
   button,
