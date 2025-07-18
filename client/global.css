@@ -601,15 +601,3 @@ h6 {
   }
 }
 
-/* В глобальном стиле или внутри компонента */
-.carousel-container {
-  overscroll-behavior: contain; /* Предотвращает "bounce" эффект */
-  -webkit-overflow-scrolling: touch; /* Обеспечивает плавную прокрутку на iOS */
-  touch-action: pan-y; /* Позволяет вертикальную прокрутку, блокируя горизонтальные свайпы, если нужно */
-}
-
-#sectionId {
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y; /* или 'auto' в зависимости от поведения */
-}
