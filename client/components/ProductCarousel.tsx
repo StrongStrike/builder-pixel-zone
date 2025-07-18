@@ -122,7 +122,7 @@ export const ProductCarousel = ({
         </div>
 
         {/* Main Carousel */}
-        <div className="relative">
+        <div className="relative" style={{ minHeight: 'max-content', height: 'max-content' }}>
           {isInView && (
             <Swiper
               modules={[
