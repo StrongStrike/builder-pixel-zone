@@ -117,7 +117,6 @@
   /* Ultra-smooth scrolling */
   body {
     scroll-behavior: smooth;
-    overscroll-behavior: none;
   }
 
   body {
@@ -151,10 +150,6 @@
 }
 
 /* Professional Swiper Customization */
-.swiper {
-  overflow: hidden !important;
-}
-
 .swiper-slide {
   transition: all 0.3s ease;
   opacity: 0.7;
@@ -362,9 +357,6 @@ section:target {
   .swiper-3d .swiper-slide-shadow-right {
     display: none !important;
   }
-  .swiper {
-    overflow: hidden !important;
-  }
 
   /* Optimize scroll behavior for mobile */
   html {
@@ -445,8 +437,6 @@ section:target {
 
   /* Fix iOS Safari bounce scrolling */
   body {
-    position: fixed;
-    overflow: hidden;
     width: 100%;
     height: 100%;
   }
