@@ -44,11 +44,10 @@ export const DesktopNavigation = ({
           <div key={category.id} className="relative group">
             <button
               onClick={() => scrollToSection(category.section)}
-              className={`relative w-14 h-14 rounded-xl font-bold transition-all duration-500 shadow-lg hover:scale-110 overflow-hidden ${
-                activeSection === category.section
-                  ? "bg-royal text-white shadow-catalog-hover scale-110"
-                  : "bg-white/90 backdrop-blur-sm text-royal hover:bg-royal hover:text-white"
-              }`}
+              className={`relative w-14 h-14 rounded-xl font-bold transition-all duration-500 shadow-lg hover:scale-110 overflow-hidden ${activeSection === category.section
+                ? "bg-royal text-white shadow-catalog-hover scale-110"
+                : "bg-white/90 backdrop-blur-sm text-royal hover:bg-royal hover:text-white"
+                }`}
             >
               <span className="relative z-10">{category.id}</span>
               {/* Shimmer effect */}
@@ -88,7 +87,27 @@ export const DesktopNavigation = ({
             {/* Shimmer effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           </button>
-
+          <div className="fixed bottom-6 right-6 z-50 block lg:hidden">
+            <button
+              onClick={() => scrollToSection("hero")}
+              className="w-14 h-14 rounded-xl bg-gradient-to-br from-catalog-hover to-royal text-white font-bold shadow-lg transition-all duration-500"
+              title="Yuqoriga"
+            >
+              <svg
+                className="w-6 h-6 mx-auto transition-transform duration-300 group-hover:-translate-y-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 10l7-7m0 0l7 7m-7-7v18"
+                />
+              </svg>
+            </button>
+          </div>
           {/* Tooltip */}
           <div className="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
             <div className="bg-royal text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg">
@@ -204,19 +223,17 @@ export const MobileNavigation = ({
                 <button
                   key={category.id}
                   onClick={() => scrollToSection(category.section)}
-                  className={`group relative p-4 rounded-xl transition-all duration-300 ${
-                    activeSection === category.section
-                      ? "bg-royal text-white shadow-lg scale-105"
-                      : "bg-gray-50 text-royal hover:bg-royal/10 hover:scale-102"
-                  }`}
+                  className={`group relative p-4 rounded-xl transition-all duration-300 ${activeSection === category.section
+                    ? "bg-royal text-white shadow-lg scale-105"
+                    : "bg-gray-50 text-royal hover:bg-royal/10 hover:scale-102"
+                    }`}
                 >
                   <div className="text-center">
                     <div
-                      className={`w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-lg ${
-                        activeSection === category.section
-                          ? "bg-white/20 text-white"
-                          : "bg-royal text-white"
-                      }`}
+                      className={`w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-lg ${activeSection === category.section
+                        ? "bg-white/20 text-white"
+                        : "bg-royal text-white"
+                        }`}
                     >
                       {category.id}
                     </div>
