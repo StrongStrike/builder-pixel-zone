@@ -4,6 +4,8 @@ import { ProductCarousel } from "../components/ProductCarousel";
 import { ScrollToTop } from "../components/ScrollToTop";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { products } from "../data/products";
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 export default function Index() {
   const [activeSection, setActiveSection] = useState("hero");
