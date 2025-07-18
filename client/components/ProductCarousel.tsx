@@ -94,6 +94,17 @@ export const ProductCarousel = ({
       }
     };
   }, [sectionId]);
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    // Проверка только на клиенте
+    if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
+      setIsIOS(
+        /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+      );
+    }
+  }, []);
 
   return (
     <section
