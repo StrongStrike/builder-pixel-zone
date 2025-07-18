@@ -444,7 +444,7 @@ section:target {
   }
 
   /* Fix iOS Safari bounce scrolling */
-  /* body {
+  body {
     position: fixed;
     overflow: hidden;
     width: 100%;
@@ -456,11 +456,15 @@ section:target {
     height: 100vh;
     height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;
-  } */
-
-    height: 100%;
+  }
   }
 
+  #root {
+    overflow-y: auto;
+    height: 100vh;
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
+  }
 screen and (max-width: 768px) {
   /* Fix Android Chrome viewport units */
   .min-h-screen {
