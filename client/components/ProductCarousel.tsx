@@ -123,7 +123,7 @@ export const ProductCarousel = ({
 
         {/* Main Carousel */}
         <div className="relative">
-          {isInView && (
+          {(!isMobile || isInView) && (
             <Swiper
               modules={[
                 Navigation,
