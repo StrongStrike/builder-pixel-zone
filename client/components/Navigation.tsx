@@ -223,7 +223,7 @@ export const MobileNavigation = ({
                 <button
                   key={category.id}
                   onClick={() => scrollToSection(category.section)}
-                  className={`group relative p-4 rounded-xl transition-all duration-300 ${activeSection === category.section
+                  className={`group relative p-2 rounded-xl transition-all duration-300 ${activeSection === category.section
                     ? "bg-royal text-white shadow-lg scale-105"
                     : "bg-gray-50 text-royal hover:bg-royal/10 hover:scale-102"
                     }`}
